@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
             hello = 0;
         }else if(hello == 50){
             hello = 51;
-        }else{
+        }else if(x < 1){
             x++;
         }
 
