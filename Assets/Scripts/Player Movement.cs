@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private int hello = 0;
+    private int x = 2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
             hello = 0;
         }else if(hello == 50){
             hello = 51;
+        }else{
+            x++;
         }
 
     }
