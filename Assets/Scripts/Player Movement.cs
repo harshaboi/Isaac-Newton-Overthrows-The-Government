@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
         hello++;
         if(hello == 100){
             hello = 0;
+        }else if(hello == 50){
+            hello = 51;
         }
+
     }
 }
