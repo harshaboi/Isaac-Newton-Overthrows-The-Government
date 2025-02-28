@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hello++;
+        if(hello == 100){
+            hello = 0;
+        }
     }
 }
