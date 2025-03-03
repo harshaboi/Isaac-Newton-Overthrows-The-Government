@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         speedRatioX = vertAxis / slowFactor;
         speedRatioZ = horizAxis / slowFactor;
         
-        Vector3 moveDirection = speed * vertAxis * transform.forward;
+        Vector3 moveDirection = speed * vertAxis * playerCamera.transform.forward;
         transform.position += moveDirection * Time.deltaTime;
 
         
