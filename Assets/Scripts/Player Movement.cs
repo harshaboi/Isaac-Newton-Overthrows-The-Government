@@ -1,41 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
-    public float slowFactor = 3;
+    private Vector3 velocity;
+    private Vector3 playerMoveInput;
+    private Vector2 playerMouseInput;
+    private float xRot;
+    private float yRot;
 
-    [SerializeField] private Camera playerCamera;
-    private float horizAxis;
-    private float vertAxis;
-    private float horizRotate;
-    private float vertRotate;
+    private CharacterController controller;
+    [SerializeField] private Transform playerCam;
+    [SerializeField] private float speed;
+    [SerializeField] private float sensitivity;
+    [SerializeField] private float jumpForce;
+    private float gravity = -9.81f;
 
-    private float speedRatioX;
-    private float speedRatioZ;
-
-    private Vector3 moveDirection;
-
-    private void Start(){
-        playerCamera.transform.position = transform.position;
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();   
+    }
+    private void Update()
+    {
+        playerMoveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        MovePlayer();
+        MoveCam();
     }
 
-    private void Update()
-    {      
-        playerCamera.transform.position = transform.position;
-        horizAxis = Input.GetAxis("Horizontal");
-        vertAxis = Input.GetAxis("Vertical");
-        horizRotate = Input.GetAxis("Mouse X");
-        vertRotate = Input.GetAxis("Mouse Y");
+    private void MovePlayer(){
+        Vector3 moveVector = transform.TransformDirection(playerMoveInput) * speed;
+        controller.Move(moveVector * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
+        if(controller.isGrounded){
+            velocity.y = -1f;
+            if(Input.GetKeyDown(KeyCode.Space)){
+                velocity.y = jumpForce;
+            }
+        }else{
+            velocity.y -= gravity * Time.deltaTime * -2f; 
+        }
+    }
 
-        moveDirection = speed * vertAxis * (playerCamera.transform.forward - new Vector3(0, playerCamera.transform.forward.y, 0));
-        transform.position += moveDirection * Time.deltaTime;
-
-        
-        playerCamera.transform.eulerAngles += speed * new Vector3(vertRotate, horizRotate, 0);
-        transform.eulerAngles += speed * new Vector3(0, horizRotate, 0);
+    private void MoveCam(){
+        playerCam.transform.position = transform.position;
+        xRot -= playerMouseInput.y * sensitivity;
+        yRot -= playerMouseInput.x * sensitivity;
+        transform.Rotate(0f, playerMouseInput.x * sensitivity, 0f);
+        playerCam.transform.localRotation = Quaternion.Euler(xRot, -yRot, 0);
     }
 }
