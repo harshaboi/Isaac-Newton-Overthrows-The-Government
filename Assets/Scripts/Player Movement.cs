@@ -16,13 +16,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float sensitivity;
     [SerializeField] private float jumpForce;
     private float gravity = -9.81f;
+    private int jumpCount = 0;
 
-    private void Start()
-    {
+    private void Start(){
         controller = GetComponent<CharacterController>();   
     }
-    private void Update()
-    {
+    private void Update(){
         playerMoveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         MovePlayer();
@@ -35,10 +34,16 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
         if(controller.isGrounded){
             velocity.y = -1f;
+            jumpCount = 0;
             if(Input.GetKeyDown(KeyCode.Space)){
                 velocity.y = jumpForce;
+                jumpCount++;
             }
         }else{
+            if(Input.GetKeyDown(KeyCode.Space) && jumpCount == 1){
+                velocity.y = jumpForce;
+                jumpCount++;
+            }
             velocity.y -= gravity * Time.deltaTime * -2f; 
         }
     }
