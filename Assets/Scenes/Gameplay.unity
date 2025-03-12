@@ -557,7 +557,7 @@ MonoBehaviour:
   sensitivity: 3
   jumpForce: 10
   dashSpeed: 20
-  dashTimes: 10
+  dashTime: 0.25
 --- !u!143 &993068306
 CharacterController:
   m_ObjectHideFlags: 0
@@ -591,7 +591,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993068299}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -603,13 +603,13 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &1160460623
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,9 +758,11 @@ GameObject:
   - component: {fileID: 1294145208}
   - component: {fileID: 1294145207}
   - component: {fileID: 1294145206}
+  - component: {fileID: 1294145210}
+  - component: {fileID: 1294145211}
   m_Layer: 0
   m_Name: Moveable platform
-  m_TagString: Untagged
+  m_TagString: movable platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -854,6 +856,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1294145210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294145205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81590652ea0545898092ddf951b2b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ttm: 5
+  yPos: 0
+  xPos: 0
+  zPos: 10
+--- !u!65 &1294145211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294145205}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.95, y: 1.05, z: 0.95}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2016440194
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,12 +906,12 @@ GameObject:
   - component: {fileID: 2016440196}
   - component: {fileID: 2016440195}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: rotation tracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2016440195
 BoxCollider:
   m_ObjectHideFlags: 0

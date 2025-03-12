@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -20,13 +21,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     public float dashSpeed;
     private int dashCool;
-    private readonly int dashThreshold = 100;
+    private bool isDashing;
+    public float dashTime;
+    private readonly int dashThreshold = 50;
     private readonly float gravity = -9.81f;
     private int jumpCount = 0;
     private float horizAxis;
     private float vertAxis;
-
-    public int dashTimes = 3;
 
     private void Start(){
         dashCool = dashThreshold;
@@ -64,17 +65,27 @@ public class PlayerMovement : MonoBehaviour
             velocity.y -= gravity * Time.deltaTime * -2f; 
         }
         if((horizAxis != 0 || vertAxis != 0) && Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
-            if(horizAxis !=0 && vertAxis != 0){
-                dash(new Vector3(horizAxis, 0, vertAxis));
-            }else if(horizAxis != 0){
-                dash(new Vector3(horizAxis, 0, 0));
-            }else{
-                dash(new Vector3(0, 0, vertAxis));
-            }
+            StartCoroutine(dash(new Vector3(horizAxis, 0, vertAxis)));
             dashCool = 0;
         }else if(Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
-            dash(transform.forward);
+            StartCoroutine(dash(transform.forward));
             dashCool = 0;
+        }
+    }
+
+    void OnTriggerEnter(Collider collision){
+        Debug.Log("colliding");
+        if(collision.gameObject.tag == "moveable platform"){
+            MoveablePlatform m = collision.gameObject.GetComponent<MoveablePlatform>();
+            controller.Move(m.getMoveVector());
+        }
+    }
+    
+    void OnTriggerExit(Collider collision){
+        Debug.Log("colliding");
+        if(collision.gameObject.tag == "moveable platform"){
+            MoveablePlatform m = collision.gameObject.GetComponent<MoveablePlatform>();
+            controller.Move(m.getMoveVector() * -1);
         }
     }
 
@@ -86,9 +97,12 @@ public class PlayerMovement : MonoBehaviour
         playerCam.transform.localRotation = Quaternion.Euler(xRot, -yRot, 0);
     }
 
-    private void dash(Vector3 vector){
-        for(int i = 0; i < dashTimes; i++){
+    private IEnumerator dash(Vector3 vector){
+        float startTime = Time.time; // need to remember this to know how long to dash
+        while(Time.time < startTime + dashTime)
+        {
             controller.Move(vector * dashSpeed * Time.deltaTime);
+            yield return null; // this will make Unity stop here and continue next frame
         }
     }
 }

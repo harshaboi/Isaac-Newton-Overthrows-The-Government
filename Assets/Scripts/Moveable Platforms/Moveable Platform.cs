@@ -1,7 +1,7 @@
 using System.Data.Common;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class MoveablePlatform : MonoBehaviour
 {
     [SerializeField] private float ttm; //Time to move
     [SerializeField] private float yPos;
@@ -17,7 +17,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         iniY = transform.position.y;
         iniX = transform.position.x;
         iniZ = transform.position.z;
-        direction = new Vector3(xPos / ttm, yPos / ttm, zPos / ttm) / 50;
+        direction = new Vector3(xPos / ttm, yPos / ttm, zPos / ttm) / 50; //gets the direction vector with the correct speed needed to go
     }
 
     // Update is called once per frame
@@ -45,5 +45,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 transform.Translate(direction);
             }
         }
+    }
+
+    public Vector3 getMoveVector(){
+        return direction;
     }
 }
