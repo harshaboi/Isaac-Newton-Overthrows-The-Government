@@ -29,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
     private readonly int dashThreshold = 50;
     private readonly float gravity = -9.81f;
     private int jumpCount = 0;
+    private int hangJumpCount = 0;
     private float horizAxis;
     private float vertAxis;
     private bool onPlatform = false;
     private float wallHangSpeed = 1;
     private bool hanging = false;
+    private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
     private void Start(){
         dashCool = dashThreshold;
         rb = GetComponent<Rigidbody>();
@@ -53,12 +55,20 @@ public class PlayerMovement : MonoBehaviour
         if(onPlatform){
             controller.Move(m.getMoveVector());
         }
+        if(unhangTimer != 0){
+            unhangTimer += 1;
+            if(unhangTimer >= 25){
+                unhangTimer = 0;
+                wallHangSpeed = 1;
+            }
+        }
     }
     private void MovePlayer(){
         Vector3 moveVector = transform.TransformDirection(playerMoveInput) * speed;
         controller.Move(moveVector * Time.deltaTime * wallHangSpeed);
         controller.Move(velocity * Time.deltaTime);
         if(controller.isGrounded){
+            hangJumpCount = 0;
             if(!hanging){
                 velocity.y = -1f;
             }else{
@@ -70,9 +80,12 @@ public class PlayerMovement : MonoBehaviour
                 jumpCount++;
             }
         }else{
-            if(Input.GetKeyDown(KeyCode.Space) && jumpCount == 1){
+            if(Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && hangJumpCount <= 2){
                 velocity.y = jumpForce;
                 jumpCount++;
+            }
+            if(hanging){
+                jumpCount = 1;
             }
             if(!hanging){
                 velocity.y -= gravity * Time.deltaTime * -2f; 
@@ -111,8 +124,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnCollisionExit(Collision collision){
         if(collision.gameObject.tag == "wall"){
-            wallHangSpeed = 1;
             hanging = false;
+            hangJumpCount++;
         }
     }
     private void MoveCam(){
