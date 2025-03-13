@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private float horizAxis;
     private float vertAxis;
     private bool onPlatform = false;
+    private float wallHangSpeed = 1;
+    private bool hanging = false;
     private void Start(){
         dashCool = dashThreshold;
         rb = GetComponent<Rigidbody>();
@@ -54,10 +56,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void MovePlayer(){
         Vector3 moveVector = transform.TransformDirection(playerMoveInput) * speed;
-        controller.Move(moveVector * Time.deltaTime);
+        controller.Move(moveVector * Time.deltaTime * wallHangSpeed);
         controller.Move(velocity * Time.deltaTime);
         if(controller.isGrounded){
-            velocity.y = -1f;
+            if(!hanging){
+                velocity.y = -1f;
+            }else{
+                velocity.y = 0;
+            }
             jumpCount = 0;
             if(Input.GetKeyDown(KeyCode.Space)){
                 velocity.y = jumpForce;
@@ -68,7 +74,11 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = jumpForce;
                 jumpCount++;
             }
-            velocity.y -= gravity * Time.deltaTime * -2f; 
+            if(!hanging){
+                velocity.y -= gravity * Time.deltaTime * -2f; 
+            }else{
+                velocity.y = 0;
+            }
         }
         if((horizAxis != 0 || vertAxis != 0) && Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
             StartCoroutine(dash(new Vector3(horizAxis, 0, vertAxis)));
@@ -77,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(dash(transform.forward));
             dashCool = 0;
         }
+        
     }
 
     void OnTriggerEnter(Collider other){
@@ -88,6 +99,20 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "moveable platform"){
             onPlatform = false;
+        }
+    }
+    void OnCollisionStay(Collision hit){
+        if(hit.gameObject.tag == "wall"){
+            if(Input.GetKey(KeyCode.Space)){
+                wallHangSpeed = 0.5f;
+                hanging = true;
+            }
+        }
+    }
+    void OnCollisionExit(Collision collision){
+        if(collision.gameObject.tag == "wall"){
+            wallHangSpeed = 1;
+            hanging = false;
         }
     }
     private void MoveCam(){

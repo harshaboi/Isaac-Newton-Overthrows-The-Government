@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - moveable platform
+  - wall
   layers:
   - Default
   - TransparentFX
