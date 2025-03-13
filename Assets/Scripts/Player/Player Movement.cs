@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.Rendering;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,23 +14,24 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 playerMouseInput;
     private float xRot;
     private float yRot;
-
+    private MoveablePlatform m;
     private CharacterController controller;
     private Rigidbody rb;
     [SerializeField] private Transform playerCam;
     [SerializeField] private float speed;
     [SerializeField] private float sensitivity;
     [SerializeField] private float jumpForce;
-    public float dashSpeed;
+    public float slowFactor;
+    private float dashSpeed = 20;
     private int dashCool;
     private bool isDashing;
-    public float dashTime;
+    private float dashTime = 0.25f;
     private readonly int dashThreshold = 50;
     private readonly float gravity = -9.81f;
     private int jumpCount = 0;
     private float horizAxis;
     private float vertAxis;
-
+    private bool onPlatform = false;
     private void Start(){
         dashCool = dashThreshold;
         rb = GetComponent<Rigidbody>();
@@ -45,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate(){
         dashCool++;
+        if(onPlatform){
+            controller.Move(m.getMoveVector());
+        }
     }
     private void MovePlayer(){
         Vector3 moveVector = transform.TransformDirection(playerMoveInput) * speed;
@@ -73,22 +79,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collision){
-        Debug.Log("colliding");
-        if(collision.gameObject.tag == "moveable platform"){
-            MoveablePlatform m = collision.gameObject.GetComponent<MoveablePlatform>();
-            controller.Move(m.getMoveVector());
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.tag == "moveable platform"){
+            onPlatform = true;
+            m = other.gameObject.GetComponent<MoveablePlatform>();
         }
     }
-    
-    void OnTriggerExit(Collider collision){
-        Debug.Log("colliding");
-        if(collision.gameObject.tag == "moveable platform"){
-            MoveablePlatform m = collision.gameObject.GetComponent<MoveablePlatform>();
-            controller.Move(m.getMoveVector() * -1);
+    void OnTriggerExit(Collider other){
+        if(other.gameObject.tag == "moveable platform"){
+            onPlatform = false;
         }
     }
-
     private void MoveCam(){
         playerCam.transform.position = transform.position;
         xRot -= playerMouseInput.y * sensitivity;
