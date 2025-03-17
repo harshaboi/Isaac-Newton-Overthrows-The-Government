@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector3 velocity;
     private Vector3 playerMoveInput;
+    private Vector3 impact = Vector3.zero;
     private Vector2 playerMouseInput;
     private float xRot;
     private float yRot;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float sensitivity;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float mass;
     public float slowFactor;
     private float dashSpeed = 20;
     private int dashCool;
@@ -58,6 +60,10 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha3)){
             equipped = 3;
         }
+        if(impact.magnitude > 0.2){
+            controller.Move(impact * Time.deltaTime);
+        }
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 
     private void FixedUpdate(){
@@ -72,6 +78,10 @@ public class PlayerMovement : MonoBehaviour
                 wallHangSpeed = 1;
             }
         }
+    }
+    public void addImpact(Vector3 dir, float force){
+        dir.Normalize();
+        impact += -1 * dir.normalized * force / mass;
     }
     private void MovePlayer(){
         Vector3 moveVector = transform.TransformDirection(playerMoveInput) * speed;

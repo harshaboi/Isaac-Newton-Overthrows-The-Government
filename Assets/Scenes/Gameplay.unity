@@ -556,6 +556,7 @@ MonoBehaviour:
   speed: 10
   sensitivity: 3
   jumpForce: 10
+  mass: 1
   slowFactor: 2
   equipped: 1
 --- !u!143 &993068306
@@ -840,7 +841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ccc88b4bb4140c680d1cbc668c5abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFactor: 5
+  speedFactor: 100
+  reloadTime: 500
 --- !u!1 &2016440194
 GameObject:
   m_ObjectHideFlags: 0
