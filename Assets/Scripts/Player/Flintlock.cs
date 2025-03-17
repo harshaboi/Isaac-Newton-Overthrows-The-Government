@@ -4,8 +4,8 @@ using UnityEngine;
 public class Flintlock : MonoBehaviour{
     private PlayerMovement p;
     [SerializeField] private float speedFactor;
+    [SerializeField] private int maxTime;
     private int reloadTime = 500;
-    public int maxTime;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
      p = transform.parent.GetComponent<PlayerMovement>();   
@@ -22,7 +22,7 @@ public class Flintlock : MonoBehaviour{
     }
 
     void FixedUpdate(){
-        if(reloadTime < 1000){
+        if(reloadTime < maxTime){
             reloadTime++;
         }
     }

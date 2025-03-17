@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Rendering;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private int dashCool;
     private bool isDashing;
     private float dashTime = 0.25f;
-    private readonly int dashThreshold = 50;
+    private readonly int dashThreshold = 150;
     private readonly float gravity = -9.81f;
     private int jumpCount = 0;
     private int hangJumpCount = 0;
@@ -67,7 +62,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        dashCool++;
+        if(dashCool < dashThreshold){
+            dashCool++;
+        }
         if(onPlatform){
             controller.Move(m.getMoveVector());
         }
@@ -112,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         if((horizAxis != 0 || vertAxis != 0) && Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
-            StartCoroutine(dash(new Vector3(horizAxis, 0, vertAxis)));
+            StartCoroutine(dash(transform.TransformDirection(new Vector3(horizAxis, 0, vertAxis))));
             dashCool = 0;
         }else if(Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
             StartCoroutine(dash(transform.forward));
