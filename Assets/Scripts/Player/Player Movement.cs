@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private float wallHangSpeed = 1;
     private bool hanging = false;
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
+    public int equipped = 1;
     private void Start(){
         dashCool = dashThreshold;
         rb = GetComponent<Rigidbody>();
@@ -48,6 +49,15 @@ public class PlayerMovement : MonoBehaviour
         playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         MovePlayer();
         MoveCam();
+        if(Input.GetKeyDown(KeyCode.Alpha1)){
+            equipped = 1;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2)){
+            equipped = 2;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3)){
+            equipped = 3;
+        }
     }
 
     private void FixedUpdate(){
@@ -80,17 +90,15 @@ public class PlayerMovement : MonoBehaviour
                 jumpCount++;
             }
         }else{
-            if(Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && hangJumpCount <= 2){
+            if(Input.GetKeyDown(KeyCode.Space) && jumpCount == 1 && hangJumpCount <= 3){
                 velocity.y = jumpForce;
                 jumpCount++;
             }
             if(hanging){
                 jumpCount = 1;
-            }
-            if(!hanging){
-                velocity.y -= gravity * Time.deltaTime * -2f; 
-            }else{
                 velocity.y = 0;
+            }else{
+                velocity.y -= gravity * Time.deltaTime * -2f; 
             }
         }
         if((horizAxis != 0 || vertAxis != 0) && Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
@@ -101,6 +109,14 @@ public class PlayerMovement : MonoBehaviour
             dashCool = 0;
         }
         
+    }
+    
+    private void MoveCam(){
+        playerCam.transform.position = transform.position;
+        xRot -= playerMouseInput.y * sensitivity;
+        yRot -= playerMouseInput.x * sensitivity;
+        transform.Rotate(0f, playerMouseInput.x * sensitivity, 0f);
+        playerCam.transform.localRotation = Quaternion.Euler(xRot, -yRot, 0);
     }
 
     void OnTriggerEnter(Collider other){
@@ -128,13 +144,6 @@ public class PlayerMovement : MonoBehaviour
             hangJumpCount++;
         }
     }
-    private void MoveCam(){
-        playerCam.transform.position = transform.position;
-        xRot -= playerMouseInput.y * sensitivity;
-        yRot -= playerMouseInput.x * sensitivity;
-        transform.Rotate(0f, playerMouseInput.x * sensitivity, 0f);
-        playerCam.transform.localRotation = Quaternion.Euler(xRot, -yRot, 0);
-    }
 
     private IEnumerator dash(Vector3 vector){
         float startTime = Time.time; // need to remember this to know how long to dash
@@ -143,5 +152,11 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(vector * dashSpeed * Time.deltaTime);
             yield return null; // this will make Unity stop here and continue next frame
         }
+    }
+    public Vector3 getForward(){
+        return playerCam.transform.forward;
+    }
+    public CharacterController getController(){
+        return controller;
     }
 }
