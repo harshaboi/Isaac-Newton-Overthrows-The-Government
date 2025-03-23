@@ -5,6 +5,7 @@ public class Flintlock : MonoBehaviour{
     private PlayerMovement p;
     [SerializeField] private float speedFactor;
     [SerializeField] private int maxTime;
+    [SerializeField] private GameObject bullet;
     private int reloadTime = 500;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -15,8 +16,7 @@ public class Flintlock : MonoBehaviour{
     void Update(){
         if(p.equipped == 1){
             if(Input.GetButtonDown("Fire1") && reloadTime >= maxTime){
-                p.addImpact(p.getForward(), speedFactor);
-                reloadTime = 0;
+                shoot();
             }
         }
     }
@@ -25,5 +25,11 @@ public class Flintlock : MonoBehaviour{
         if(reloadTime < maxTime){
             reloadTime++;
         }
+    }
+
+    private void shoot(){
+        p.addImpact(p.getForward(), speedFactor);
+        reloadTime = 0;
+        Instantiate(bullet, p.transform.position, p.transform.rotation);
     }
 }
