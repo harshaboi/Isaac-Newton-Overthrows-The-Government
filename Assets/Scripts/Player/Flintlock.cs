@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class Flintlock : MonoBehaviour{
     private PlayerMovement p;
+    private GameObject player;
     [SerializeField] private float speedFactor;
     [SerializeField] private int maxTime;
     [SerializeField] private GameObject bullet;
     private int reloadTime = 500;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
-     p = transform.parent.GetComponent<PlayerMovement>();   
+        player = GameObject.Find("player");
+        p = transform.parent.GetComponent<PlayerMovement>();   
     }
 
     // Update is called once per frame
@@ -30,6 +32,6 @@ public class Flintlock : MonoBehaviour{
     private void shoot(){
         p.addImpact(p.getForward(), speedFactor);
         reloadTime = 0;
-        Instantiate(bullet, p.transform.position, p.transform.rotation);
+        Instantiate(bullet, p.transform.Find("Shoot Pos").position, p.transform.rotation);
     }
 }

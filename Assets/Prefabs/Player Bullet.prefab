@@ -13,14 +13,14 @@ GameObject:
   - component: {fileID: 3082214582512692372}
   - component: {fileID: 166726067493691086}
   - component: {fileID: 23033612009115232}
-  - component: {fileID: 3873648956093033323}
+  - component: {fileID: 5571134023659148099}
   m_Layer: 0
   m_Name: Player Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6348274409119794919
 Transform:
   m_ObjectHideFlags: 0
@@ -131,11 +131,11 @@ CharacterController:
   m_Height: 1
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.0000001
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3873648956093033323
+--- !u!114 &5571134023659148099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,5 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845d6ec3f6f65431eb3c84b13bbd887d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   speed: 0.25

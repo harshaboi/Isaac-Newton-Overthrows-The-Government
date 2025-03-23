@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private MoveablePlatform m;
     private CharacterController controller;
     private Rigidbody rb;
-    [SerializeField] private Transform playerCam;
+    private Transform playerCam;
     [SerializeField] private float speed;
     [SerializeField] private float sensitivity;
     [SerializeField] private float jumpForce;
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
     public int equipped = 1;
     private void Start(){
+        playerCam = GameObject.Find("Main Camera").transform;
         dashCool = dashThreshold;
         rb = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();   
