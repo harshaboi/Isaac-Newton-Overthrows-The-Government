@@ -377,6 +377,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &438003823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8444567457778280051, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
+  m_PrefabInstance: {fileID: 64036666922721037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +599,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -111.994
       objectReference: {fileID: 0}
+    - target: {fileID: 5028511306825496657, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
+      propertyPath: shootPos
+      value: 
+      objectReference: {fileID: 438003823}
     - target: {fileID: 6806822971059638248, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.049
@@ -655,6 +664,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3082214582512692372, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082214582512692372, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5865084463207512558, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
       propertyPath: m_Name
       value: Player Bullet
@@ -662,6 +679,18 @@ PrefabInstance:
     - target: {fileID: 5865084463207512558, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
       propertyPath: m_LocalPosition.x

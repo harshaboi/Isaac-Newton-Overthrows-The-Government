@@ -7,17 +7,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private GameObject player;
     private PlayerMovement p;
     private CharacterController controller;
+    private Rigidbody rb;
     private Vector3 direction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         player = GameObject.Find("Player");
         p = player.GetComponent<PlayerMovement>();
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
         direction = p.getForward();
+        rb = GetComponent<Rigidbody>();
     }
+
+
 
     // Update is called once per frame
     void Update(){
-        controller.Move(direction * speed);
+        //controller.Move(direction * speed);
+        rb.AddForce(direction, ForceMode.Force);
     }
 }
