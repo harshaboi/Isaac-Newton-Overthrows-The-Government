@@ -13,16 +13,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Start(){
         player = GameObject.Find("Player");
         p = player.GetComponent<PlayerMovement>();
-        //controller = GetComponent<CharacterController>();
         direction = p.getForward();
         rb = GetComponent<Rigidbody>();
     }
 
-
+    void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.tag != "Player"){
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update(){
-        //controller.Move(direction * speed);
-        rb.AddForce(direction, ForceMode.Force);
+        rb.AddForce(direction * speed, ForceMode.VelocityChange);
     }
 }

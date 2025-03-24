@@ -467,7 +467,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
@@ -600,9 +600,17 @@ PrefabInstance:
       value: -111.994
       objectReference: {fileID: 0}
     - target: {fileID: 5028511306825496657, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
+      propertyPath: maxTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028511306825496657, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: shootPos
       value: 
       objectReference: {fileID: 438003823}
+    - target: {fileID: 5028511306825496657, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
+      propertyPath: speedFactor
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6806822971059638248, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.049
@@ -649,6 +657,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7376743715013538210, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7384978265359367191, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
