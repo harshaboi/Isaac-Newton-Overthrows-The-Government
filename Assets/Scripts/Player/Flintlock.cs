@@ -18,7 +18,7 @@ public class Flintlock : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(p.equipped == 1){
-            if(Input.GetButtonDown("Fire1") && timer >= reloadTime){
+            if(Input.GetButtonDown("Fire1") && timer >= (reloadTime * 50)){
                 shoot();
             }
         }
@@ -26,14 +26,13 @@ public class Flintlock : MonoBehaviour{
 
     void FixedUpdate(){
         if(timer < (reloadTime * 50)){
-            reloadTime++;
+            timer++;
         }
     }
 
     private void shoot(){
         p.addImpact(p.getForward(), speedFactor);
-        reloadTime = 0;
+        timer = 0;
         Instantiate(bullet, shootPos.transform.position, p.transform.rotation);
-        Debug.Log(p.transform.rotation);
     }
 }

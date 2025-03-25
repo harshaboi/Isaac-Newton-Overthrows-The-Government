@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3620429026323949590}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7955828, z: -0, w: 0.605845}
-  m_LocalPosition: {x: -0.03, y: 0.086, z: 1.17}
+  m_LocalRotation: {x: -0, y: -0.8290102, z: -0, w: 0.5592336}
+  m_LocalPosition: {x: 0.221, y: -0.079, z: 0.639}
   m_LocalScale: {x: 0.64875823, y: 0.2581, z: 0.2127}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7376743715013538210}
-  m_LocalEulerAnglesHint: {x: 0, y: -105.421, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -111.994, z: 0}
 --- !u!33 &3723714004049938835
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -121,9 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ccc88b4bb4140c680d1cbc668c5abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedFactor: 0
-  maxTime: 1
+  speedFactor: 100
+  reloadTime: 1
   bullet: {fileID: 5865084463207512558, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+  shootPos: {fileID: 8444567457778280051}
 --- !u!1 &6873938210455031941
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e5272aee9a6874e8aba25c15e8bd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCam: {fileID: 0}
   speed: 10
   sensitivity: 3
   jumpForce: 10
@@ -306,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 8444567457778280051}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.755}
+  m_LocalPosition: {x: 0, y: 0.049, z: 0.755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
