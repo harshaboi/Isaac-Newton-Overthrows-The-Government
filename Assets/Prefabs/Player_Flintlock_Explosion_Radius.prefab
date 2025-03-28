@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7468655943654876661}
   - component: {fileID: 7452387281572327861}
   - component: {fileID: 5680256839711801506}
-  - component: {fileID: 5784083997418550711}
+  - component: {fileID: 8950237597176096687}
+  - component: {fileID: 4565473944314474712}
   m_Layer: 0
-  m_Name: Explosion Radius
+  m_Name: Player_Flintlock_Explosion_Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,13 +104,13 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5784083997418550711
+--- !u!114 &8950237597176096687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,4 +122,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3176aff1c23e8459eb121a3e37da70d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeDelete: 5
+  playerTimeDelete: 5
+  type: Player F
+--- !u!54 &4565473944314474712
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7762532794057911080}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

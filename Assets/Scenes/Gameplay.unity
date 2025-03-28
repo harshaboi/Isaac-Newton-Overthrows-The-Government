@@ -576,7 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 330585546}
     - target: {fileID: 5028511306825496657, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: reloadTime
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6873938210455031941, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: m_Name
@@ -677,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7762532794057911080, guid: e52ed69349bac4df895b46556eb6109e, type: 3}
       propertyPath: m_Name
-      value: Explosion Radius
+      value: Player_Flintlock_Eplosion_Radius
       objectReference: {fileID: 0}
     - target: {fileID: 7762532794057911080, guid: e52ed69349bac4df895b46556eb6109e, type: 3}
       propertyPath: m_IsActive
@@ -700,17 +700,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Bullet
       objectReference: {fileID: 0}
-    - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.05
+    - target: {fileID: 5865084463207512558, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -751,6 +743,10 @@ PrefabInstance:
     - target: {fileID: 6348274409119794919, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812679115248272239, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

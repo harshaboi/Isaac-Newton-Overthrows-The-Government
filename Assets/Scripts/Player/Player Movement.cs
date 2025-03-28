@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour{
     private Vector3 velocity;
     private Vector3 playerMoveInput;
     private Vector3 impact = Vector3.zero;
@@ -33,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float wallHangSpeed = 1;
     private bool hanging = false;
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
-    public int equipped = 1;
+    private int equipped = 1;
     private void Start(){
         //playerCam = GameObject.Find("Main Camera").transform;
         dashCool = dashThreshold;
@@ -169,5 +168,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public float getXRot(){
         return xRot;
+    }
+    public int getEquipped(){
+        return equipped;
     }
 }

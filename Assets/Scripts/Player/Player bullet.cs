@@ -1,8 +1,6 @@
-    using UnityEngine;
-using UnityEngine.TextCore.Text;
+using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
-{
+public class PlayerBullet : MonoBehaviour{
     [SerializeField] private float speed;
     [SerializeField] private GameObject explosion;
     private GameObject player;
@@ -19,6 +17,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision){
+        Debug.Log(collision.gameObject.name);
         if(collision.gameObject.tag != "Player"){
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);

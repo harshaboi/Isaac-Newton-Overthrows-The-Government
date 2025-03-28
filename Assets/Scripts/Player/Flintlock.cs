@@ -17,7 +17,7 @@ public class Flintlock : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if(p.equipped == 1){
+        if(p.getEquipped() == 1){
             if(Input.GetButtonDown("Fire1") && timer >= (reloadTime * 50)){
                 shoot();
             }

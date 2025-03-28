@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class MoveablePlatform : MonoBehaviour
-{
+public class MoveablePlatform : MonoBehaviour{
     [SerializeField] private float ttm; //Time to move
     [SerializeField] private float yPos;
     [SerializeField] private float xPos;
