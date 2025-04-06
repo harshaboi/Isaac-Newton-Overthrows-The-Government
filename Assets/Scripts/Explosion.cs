@@ -8,8 +8,10 @@ public class Explosion : MonoBehaviour{
     [SerializeField] private String type;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
-        if(type == "Player F"){
-            timeDelete = playerTimeDelete; //remove later
+        switch(type){
+            case "Player Flintlock":
+                timeDelete = playerTimeDelete;
+                break;
         }
     }
 
