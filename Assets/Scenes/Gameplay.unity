@@ -576,7 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 330585546}
     - target: {fileID: 5028511306825496657, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: reloadTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6873938210455031941, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
       propertyPath: m_Name
@@ -696,6 +696,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5571134023659148099, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5865084463207512558, guid: d0ca52e2f91124459ba2ef8d46710f06, type: 3}
       propertyPath: m_Name
       value: Player Bullet

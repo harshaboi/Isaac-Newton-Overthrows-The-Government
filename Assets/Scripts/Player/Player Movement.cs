@@ -4,36 +4,29 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour{
     [SerializeField] private Transform playerCam;
-    [SerializeField] private float speed;
-    [SerializeField] private float sensitivity;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float mass;
-    private Vector3 velocity;
-    private Vector3 playerMoveInput;
+    [SerializeField] private float speed, sensitivity, jumpForce, mass;
+    private Vector3 velocity, playerMoveInput;
     private Vector3 impact = Vector3.zero;
     private Vector2 playerMouseInput;
-    private float xRot;
-    private float yRot;
+    private float xRot, yRot;
     private MoveablePlatform m;
     private CharacterController controller;
     private Rigidbody rb;
-    public float slowFactor;
+    //public float slowFactor;
     private float dashSpeed = 20;
     private int dashCool;
     private bool isDashing;
     private float dashTime = 0.25f;
     private readonly int dashThreshold = 150;
     private readonly float gravity = -9.81f;
-    private int jumpCount = 0;
-    private int hangJumpCount = 0;
-    private float horizAxis;
-    private float vertAxis;
+    private int jumpCount, hangJumpCount = 0;
+    private float horizAxis, vertAxis;
     private bool onPlatform = false;
     private float wallHangSpeed = 1;
     private bool hanging = false;
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
     private int equipped = 1;
-    private void Start(){
+    private void Awake(){
         //playerCam = GameObject.Find("Main Camera").transform;
         dashCool = dashThreshold;
         rb = GetComponent<Rigidbody>();

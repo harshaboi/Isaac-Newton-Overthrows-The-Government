@@ -12,11 +12,12 @@ public class PlayerBullet : MonoBehaviour{
         p = player.GetComponent<PlayerMovement>();
         direction = p.getForward();
         rb = GetComponent<Rigidbody>();
+        rb.AddForce(direction * speed, ForceMode.Impulse);
     }
 
-    void Update(){
-        rb.AddForce(direction * speed, ForceMode.VelocityChange);
-    }
+    // void Update(){
+    //     rb.AddForce(direction * speed, ForceMode.Impulse);
+    // }
     void OnCollisionEnter(Collision collision){
         Debug.Log(collision.gameObject.name);
         if(collision.gameObject.tag != "Player"){

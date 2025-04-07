@@ -1,17 +1,12 @@
 using UnityEngine;
 
 public class MoveablePlatform : MonoBehaviour{
-    [SerializeField] private float ttm; //Time to move
-    [SerializeField] private float yPos;
-    [SerializeField] private float xPos;
-    [SerializeField] private float zPos;
-    private float iniY;
-    private float iniX;
-    private float iniZ;
+    [SerializeField] private float ttm, yPos, xPos, zPos; //ttm is time to move
     private Vector3 direction;
-    private bool goingTo = true;
     private CharacterController controller;
-    void Start(){
+    private float iniY, iniX, iniZ;
+    private bool goingTo = true;
+    void Awake(){
         controller = GetComponent<CharacterController>();
         iniY = transform.position.y;
         iniX = transform.position.x;
