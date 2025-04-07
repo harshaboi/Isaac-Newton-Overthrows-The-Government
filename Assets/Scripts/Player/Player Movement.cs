@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour{
+    [SerializeField] private Transform playerCam;
+    [SerializeField] private float speed;
+    [SerializeField] private float sensitivity;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float mass;
     private Vector3 velocity;
     private Vector3 playerMoveInput;
     private Vector3 impact = Vector3.zero;
@@ -12,11 +17,6 @@ public class PlayerMovement : MonoBehaviour{
     private MoveablePlatform m;
     private CharacterController controller;
     private Rigidbody rb;
-    [SerializeField] private Transform playerCam;
-    [SerializeField] private float speed;
-    [SerializeField] private float sensitivity;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float mass;
     public float slowFactor;
     private float dashSpeed = 20;
     private int dashCool;

@@ -44,10 +44,10 @@ public class MoveablePlatform : MonoBehaviour{
             }
         }
     }
-    public bool getDirection(){
-        return goingTo;
-    }
     public Vector3 getMoveVector(){
         return direction;
+    }
+    public bool getDirection(){
+        return goingTo;
     }
 }

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour{
     private int timer = 0;
-    public int playerTimeDelete;//remove later
-    private int timeDelete; // in seconds
-    [SerializeField] private String type;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int playerTimeDelete; //remove later
+    private int timeDelete; //in seconds
+    [SerializeField] private string type;
+
     void Start(){
         switch(type){
             case "Player Flintlock":
@@ -14,7 +14,6 @@ public class Explosion : MonoBehaviour{
                 break;
         }
     }
-
 
     void FixedUpdate(){
         if(timer >= (timeDelete * 50)){
