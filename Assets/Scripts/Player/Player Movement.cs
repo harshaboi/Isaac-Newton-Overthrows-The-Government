@@ -162,6 +162,9 @@ public class PlayerMovement : MonoBehaviour{
     public float getXRot(){
         return xRot;
     }
+    public float getYRot(){
+        return yRot;
+    }
     public int getEquipped(){
         return equipped;
     }

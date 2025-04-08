@@ -5,12 +5,15 @@ public class Flintlock : MonoBehaviour{
     [SerializeField] private GameObject bullet, shootPos;
     [SerializeField] private float speedFactor;
     [SerializeField] private int reloadTime; //In seconds
+    public float factor;
     private PlayerMovement p;
     private GameObject player;
+    private Vector3 axis;
     private int timer = 500;
     void Awake(){
-        player = GameObject.Find("player");
-        p = transform.parent.GetComponent<PlayerMovement>();   
+        player = GameObject.Find("Player");
+        p = player.GetComponent<PlayerMovement>();
+        
     }
 
     void Update(){
