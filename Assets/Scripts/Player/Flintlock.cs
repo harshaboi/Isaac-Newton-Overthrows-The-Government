@@ -9,30 +9,30 @@ public class Flintlock : MonoBehaviour{
     private PlayerMovement p;
     private GameObject player;
     private Vector3 axis;
-    private int timer = 500;
+    //private int timer = 500;
     void Awake(){
         player = GameObject.Find("Player");
-        p = player.GetComponent<PlayerMovement>();
-        
+        p = player.GetComponent<PlayerMovement>(); 
     }
 
     void Update(){
-        if(p.getEquipped() == 1){
-            if(Input.GetButtonDown("Fire1") && timer >= (reloadTime * 50)){
-                shoot();
-            }
+        // if(p.getEquipped() == 1){
+        if(Input.GetButtonDown("Fire1") && p.getFlintTimer() >= (reloadTime * 50)){
+            shoot();
         }
+        // }
+        /*test for rotation
+        First gets the player position and then move the point of rotation to the right of the player position by getting the perpendicular vector and moving the point by that vector
+        Not sure if I needed two cross products but I used it anyways. Gets the forward 
+        */
+        //transform.RotateAround(player.transform.position - Vector3.Cross(player.transform.forward, Vector3.up).normalized * factor, Vector3.Cross(-Vector3.Cross(transform.forward, Vector3.up), Vector3.up) * 5, 1);
     }
-
-    void FixedUpdate(){
-        if(timer < (reloadTime * 50)){
-            timer++;
-        }
-    }
-
     private void shoot(){
         Instantiate(bullet, shootPos.transform.position, p.transform.rotation);
         p.addImpact(p.getForward(), speedFactor);
-        timer = 0;
+        p.resetFlintTimer();
+    }
+    public int getFlintReloadTime(){
+        return reloadTime;
     }
 }

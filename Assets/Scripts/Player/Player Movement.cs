@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour{
     [SerializeField] private Transform playerCam;
     [SerializeField] private float speed, sensitivity, jumpForce, mass;
@@ -9,9 +10,10 @@ public class PlayerMovement : MonoBehaviour{
     private Vector3 impact = Vector3.zero;
     private Vector2 playerMouseInput;
     private float xRot, yRot;
-    private MoveablePlatform m;
+    private MoveablePlatform moveable;
     private CharacterController controller;
-    private Rigidbody rb;
+    private Flintlock f;
+    private Musket m;
     //public float slowFactor;
     private float dashSpeed = 20;
     private int dashCool;
@@ -26,10 +28,14 @@ public class PlayerMovement : MonoBehaviour{
     private bool hanging = false;
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
     private int equipped = 1;
+
+    private int flintTimer, musketTimer = 500;
+
     private void Awake(){
         //playerCam = GameObject.Find("Main Camera").transform;
         dashCool = dashThreshold;
-        rb = GetComponent<Rigidbody>();
+        m = transform.GetChild(1).gameObject.GetComponent<Musket>();
+        f = transform.GetChild(0).gameObject.GetComponent<Flintlock>();
         controller = GetComponent<CharacterController>();   
     }
     private void Update(){
@@ -41,13 +47,22 @@ public class PlayerMovement : MonoBehaviour{
         MoveCam();
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             equipped = 1;
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(false);
+            //transform.GetChild(2).gameObject.SetActive(false);
         }
         if(Input.GetKeyDown(KeyCode.Alpha2)){
             equipped = 2;
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(false);
+            //transform.GetChild(2).gameObject.SetActive(false);
         }
-        if(Input.GetKeyDown(KeyCode.Alpha3)){
-            equipped = 3;
-        }
+        // if(Input.GetKeyDown(KeyCode.Alpha3)){
+        //     equipped = 3;
+        //transform.GetChild(2).gameObject.SetActive(true);
+        //     transform.GetChild(0).gameObject.SetActive(false);
+        //     transform.GetChild(1).gameObject.SetActive(false);
+        // }
         if(impact.magnitude > 0.2){
             controller.Move(impact * Time.deltaTime);
         }
@@ -59,7 +74,7 @@ public class PlayerMovement : MonoBehaviour{
             dashCool++;
         }
         if(onPlatform){
-            controller.Move(m.getMoveVector());
+            controller.Move(moveable.getMoveVector());
         }
         if(unhangTimer != 0){
             unhangTimer += 1;
@@ -67,6 +82,12 @@ public class PlayerMovement : MonoBehaviour{
                 unhangTimer = 0;
                 wallHangSpeed = 1;
             }
+        }
+        if(flintTimer < (f.getFlintReloadTime() * 50)){
+            flintTimer++;
+        }
+        if(musketTimer < (m.getMusketReloadTime() * 50)){
+            musketTimer++;
         }
     }
     public void addImpact(Vector3 dir, float force){
@@ -122,7 +143,7 @@ public class PlayerMovement : MonoBehaviour{
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "moveable platform"){
             onPlatform = true;
-            m = other.gameObject.GetComponent<MoveablePlatform>();
+            moveable = other.gameObject.GetComponent<MoveablePlatform>();
         }
     }
     void OnTriggerExit(Collider other){
@@ -147,8 +168,7 @@ public class PlayerMovement : MonoBehaviour{
 
     private IEnumerator dash(Vector3 vector){
         float startTime = Time.time; // need to remember this to know how long to dash
-        while(Time.time < startTime + dashTime)
-        {
+        while(Time.time < startTime + dashTime){
             controller.Move(vector * dashSpeed * Time.deltaTime);
             yield return null; // this will make Unity stop here and continue next frame
         }
@@ -167,5 +187,17 @@ public class PlayerMovement : MonoBehaviour{
     }
     public int getEquipped(){
         return equipped;
+    }
+    public int getFlintTimer(){
+        return flintTimer;
+    }
+    public void resetFlintTimer(){
+        flintTimer = 0;
+    }
+    public int getMusketTimer(){
+        return musketTimer;
+    }
+    public void resetMusketTimer(){
+        musketTimer = 0;
     }
 }

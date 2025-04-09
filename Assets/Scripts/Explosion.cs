@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour{
+    [SerializeField] private string type;
     private int timer = 0;
     public int playerTimeDelete; //remove later
     private int timeDelete; //in seconds
-    [SerializeField] private string type;
 
-    void Start(){
+    void Awake(){
         switch(type){
             case "Player Flintlock":
                 timeDelete = playerTimeDelete;

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6812679115248272239}
   - component: {fileID: 5869543052670687538}
   m_Layer: 0
-  m_Name: Player Bullet
+  m_Name: Player Musket Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,8 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845d6ec3f6f65431eb3c84b13bbd887d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
   explosion: {fileID: 7762532794057911080, guid: e52ed69349bac4df895b46556eb6109e, type: 3}
+  flintSpeed: 25
+  musketSpeed: 35
+  type: Musket
 --- !u!54 &6812679115248272239
 Rigidbody:
   m_ObjectHideFlags: 0
