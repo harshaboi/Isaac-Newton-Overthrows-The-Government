@@ -1,17 +1,21 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour{
     [SerializeField] private GameObject explosion;
-    [SerializeField] public float flintSpeed;
-    [SerializeField] public float musketSpeed;
-    private float speed;
     [SerializeField] private string type;
     private GameObject player;
     private PlayerMovement p;
     private Rigidbody rb;
     private Vector3 direction;
+    public float flintSpeed;
+    public float musketSpeed;
+    private float speed;
+    private float initTime;
+
     void Awake(){
+        initTime = Time.time;
         switch(type){
             case "Flintlock":
             speed = flintSpeed;
@@ -19,6 +23,7 @@ public class PlayerBullet : MonoBehaviour{
 
             case "Musket":
             speed = musketSpeed;
+            rb.useGravity = false;
             break;
         }
     }
@@ -30,9 +35,10 @@ public class PlayerBullet : MonoBehaviour{
         rb.AddForce(direction * speed, ForceMode.Impulse);
     }
 
-    // void Update(){
-    //     rb.AddForce(direction * speed, ForceMode.Impulse);
-    // }
+    void Update(){
+        if(Time.time >= initTime + 250f) Destroy(gameObject);
+    }
+
     void OnCollisionEnter(Collision collision){
         if(speed == flintSpeed){
             if(collision.gameObject.tag != "Player"){

@@ -5,19 +5,20 @@ public class Flintlock : MonoBehaviour{
     [SerializeField] private GameObject bullet, shootPos;
     [SerializeField] private float speedFactor;
     [SerializeField] private int reloadTime; //In seconds
-    public float factor;
     private PlayerMovement p;
     private GameObject player;
+    private ReloadManager r;
     private Vector3 axis;
     //private int timer = 500;
     void Awake(){
         player = GameObject.Find("Player");
-        p = player.GetComponent<PlayerMovement>(); 
+        p = player.GetComponent<PlayerMovement>();
+        r = player.GetComponent<ReloadManager>();
     }
 
     void Update(){
         // if(p.getEquipped() == 1){
-        if(Input.GetButtonDown("Fire1") && p.getFlintTimer() >= (reloadTime * 50)){
+        if(Input.GetButtonDown("Fire1") && r.getFlintTimer() >= (reloadTime * 50)){
             shoot();
         }
         // }
@@ -30,7 +31,7 @@ public class Flintlock : MonoBehaviour{
     private void shoot(){
         Instantiate(bullet, shootPos.transform.position, p.transform.rotation);
         p.addImpact(p.getForward(), speedFactor);
-        p.resetFlintTimer();
+        r.resetFlintTimer();
     }
     public int getFlintReloadTime(){
         return reloadTime;

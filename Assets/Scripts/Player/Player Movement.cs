@@ -12,8 +12,6 @@ public class PlayerMovement : MonoBehaviour{
     private float xRot, yRot;
     private MoveablePlatform moveable;
     private CharacterController controller;
-    private Flintlock f;
-    private Musket m;
     //public float slowFactor;
     private float dashSpeed = 20;
     private int dashCool;
@@ -29,13 +27,9 @@ public class PlayerMovement : MonoBehaviour{
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
     private int equipped = 1;
 
-    private int flintTimer, musketTimer = 500;
-
     private void Awake(){
         //playerCam = GameObject.Find("Main Camera").transform;
         dashCool = dashThreshold;
-        m = transform.GetChild(1).gameObject.GetComponent<Musket>();
-        f = transform.GetChild(0).gameObject.GetComponent<Flintlock>();
         controller = GetComponent<CharacterController>();   
     }
     private void Update(){
@@ -82,12 +76,6 @@ public class PlayerMovement : MonoBehaviour{
                 unhangTimer = 0;
                 wallHangSpeed = 1;
             }
-        }
-        if(flintTimer < (f.getFlintReloadTime() * 50)){
-            flintTimer++;
-        }
-        if(musketTimer < (m.getMusketReloadTime() * 50)){
-            musketTimer++;
         }
     }
     public void addImpact(Vector3 dir, float force){
@@ -187,17 +175,5 @@ public class PlayerMovement : MonoBehaviour{
     }
     public int getEquipped(){
         return equipped;
-    }
-    public int getFlintTimer(){
-        return flintTimer;
-    }
-    public void resetFlintTimer(){
-        flintTimer = 0;
-    }
-    public int getMusketTimer(){
-        return musketTimer;
-    }
-    public void resetMusketTimer(){
-        musketTimer = 0;
     }
 }
