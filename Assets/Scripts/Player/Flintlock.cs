@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 public class Flintlock : MonoBehaviour{
@@ -24,7 +25,7 @@ public class Flintlock : MonoBehaviour{
         // }
         /*test for rotation
         First gets the player position and then move the point of rotation to the right of the player position by getting the perpendicular vector and moving the point by that vector
-        Not sure if I needed two cross products but I used it anyways. Gets the forward 
+        Not sure if I needed two cross products but I used it anyways.
         */
         //transform.RotateAround(player.transform.position - Vector3.Cross(player.transform.forward, Vector3.up).normalized * factor, Vector3.Cross(-Vector3.Cross(transform.forward, Vector3.up), Vector3.up) * 5, 1);
     }

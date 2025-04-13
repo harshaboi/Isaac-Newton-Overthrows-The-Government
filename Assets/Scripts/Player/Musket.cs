@@ -10,7 +10,6 @@ public class Musket : MonoBehaviour
     void Awake(){
         player = GameObject.Find("Player");
         r = player.GetComponent<ReloadManager>();
-        
     }
 
     // Update is called once per frame
@@ -21,7 +20,7 @@ public class Musket : MonoBehaviour
     }
 
     private void shoot(){
-        Instantiate(bullet, shootPos.transform.position, r.transform.rotation);
+        Instantiate(bullet, shootPos.transform.position, player.transform.rotation);
         r.resetMusketTimer();
     }
     public int getMusketReloadTime(){

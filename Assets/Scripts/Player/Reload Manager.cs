@@ -5,10 +5,11 @@ using UnityEngine;
 public class ReloadManager : MonoBehaviour{
     private Flintlock f;
     private Musket m;
-    private int flintTimer, musketTimer = int.MaxValue;
+    private int flintTimer, musketTimer;
     void Awake(){
         f = transform.GetChild(0).gameObject.GetComponent<Flintlock>();
         m = transform.GetChild(1).gameObject.GetComponent<Musket>();
+        flintTimer = musketTimer = 10000;
     }
 
     void FixedUpdate(){

@@ -15,6 +15,10 @@ public class PlayerBullet : MonoBehaviour{
     private float initTime;
 
     void Awake(){
+        player = GameObject.Find("Player");
+        p = player.GetComponent<PlayerMovement>();
+        direction = p.getForward();
+        rb = GetComponent<Rigidbody>();
         initTime = Time.time;
         switch(type){
             case "Flintlock":
@@ -28,10 +32,6 @@ public class PlayerBullet : MonoBehaviour{
         }
     }
     void Start(){
-        player = GameObject.Find("Player");
-        p = player.GetComponent<PlayerMovement>();
-        direction = p.getForward();
-        rb = GetComponent<Rigidbody>();
         rb.AddForce(direction * speed, ForceMode.Impulse);
     }
 
