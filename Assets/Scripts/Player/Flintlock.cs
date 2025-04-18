@@ -18,11 +18,9 @@ public class Flintlock : MonoBehaviour{
     }
 
     void Update(){
-        // if(p.getEquipped() == 1){
         if(Input.GetButtonDown("Fire1") && r.getFlintTimer() >= (reloadTime * 50)){
             shoot();
         }
-        // }
         /*test for rotation
         First gets the player position and then move the point of rotation to the right of the player position by getting the perpendicular vector and moving the point by that vector
         Not sure if I needed two cross products but I used it anyways.

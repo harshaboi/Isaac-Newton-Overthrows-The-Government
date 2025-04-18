@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour{
     private float wallHangSpeed = 1;
     private bool hanging = false;
     private float unhangTimer = 0; //Gives a little bit of time after unhanging from a wall where u move a little slower
-    private int equipped = 1;
 
     private void Awake(){
         //playerCam = GameObject.Find("Main Camera").transform;
@@ -39,24 +38,6 @@ public class PlayerMovement : MonoBehaviour{
         playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         MovePlayer();
         MoveCam();
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            equipped = 1;
-            transform.GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(false);
-            //transform.GetChild(2).gameObject.SetActive(false);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            equipped = 2;
-            transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(0).gameObject.SetActive(false);
-            //transform.GetChild(2).gameObject.SetActive(false);
-        }
-        // if(Input.GetKeyDown(KeyCode.Alpha3)){
-        //     equipped = 3;
-        //transform.GetChild(2).gameObject.SetActive(true);
-        //     transform.GetChild(0).gameObject.SetActive(false);
-        //     transform.GetChild(1).gameObject.SetActive(false);
-        // }
         if(impact.magnitude > 0.2){
             controller.Move(impact * Time.deltaTime);
         }
@@ -172,8 +153,5 @@ public class PlayerMovement : MonoBehaviour{
     }
     public float getYRot(){
         return yRot;
-    }
-    public int getEquipped(){
-        return equipped;
     }
 }
