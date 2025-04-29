@@ -13,12 +13,8 @@ public class ReloadManager : MonoBehaviour{
     }
 
     void FixedUpdate(){
-        if(flintTimer < (f.getFlintReloadTime() * 50)){
-            flintTimer++;
-        }
-        if(musketTimer < (m.getMusketReloadTime() * 50)){
-            musketTimer++;
-        }
+        if(flintTimer < (f.getFlintReloadTime() * 50)) flintTimer++;
+        if(musketTimer < (m.getMusketReloadTime() * 50)) musketTimer++;
     }
     public int getFlintTimer(){
         return flintTimer;

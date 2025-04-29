@@ -16,9 +16,7 @@ public class Explosion : MonoBehaviour{
     }
 
     void FixedUpdate(){
-        if(timer >= (timeDelete * 50)){
-            Destroy(gameObject);
-        }
+        if(timer >= (timeDelete * 50)) Destroy(gameObject);
         timer++;
     }
 }

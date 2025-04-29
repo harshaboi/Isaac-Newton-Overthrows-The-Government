@@ -4,7 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - player: {fileID: 6873938210455031941, guid: 8637b6bf6323a4e2ba6a798218e8a979, type: 3}
+  - explosion: {fileID: 7762532794057911080, guid: e52ed69349bac4df895b46556eb6109e, type: 3}
+  - testBlock: {fileID: 7435598769766256480, guid: 13b81a2773b9048738eaebd905445b8b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

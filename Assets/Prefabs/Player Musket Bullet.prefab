@@ -102,9 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 7762532794057911080, guid: e52ed69349bac4df895b46556eb6109e, type: 3}
+  type: Musket
+  testBlock: {fileID: 7435598769766256480, guid: 13b81a2773b9048738eaebd905445b8b, type: 3}
   flintSpeed: 25
   musketSpeed: 35
-  type: Musket
 --- !u!54 &6812679115248272239
 Rigidbody:
   m_ObjectHideFlags: 0

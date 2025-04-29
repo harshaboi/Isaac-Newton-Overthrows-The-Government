@@ -14,9 +14,7 @@ public class Musket : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(Input.GetButtonDown("Fire1") && r.getMusketTimer() >= (reloadTime * 50)){
-            shoot();
-        }
+        if(Input.GetButtonDown("Fire1") && r.getMusketTimer() >= (reloadTime * 50)) shoot();
     }
 
     private void shoot(){

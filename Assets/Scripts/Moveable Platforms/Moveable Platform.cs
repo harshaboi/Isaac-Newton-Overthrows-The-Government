@@ -11,7 +11,8 @@ public class MoveablePlatform : MonoBehaviour{
         iniY = transform.position.y;
         iniX = transform.position.x;
         iniZ = transform.position.z;
-        direction = new Vector3(xPos / ttm, yPos / ttm, zPos / ttm) / 50;
+        if(ttm != 0) direction = new Vector3(xPos / ttm, yPos / ttm, zPos / ttm) / 50;
+        else direction = Vector3.zero;
     }
 
     void FixedUpdate(){   
@@ -25,18 +26,14 @@ public class MoveablePlatform : MonoBehaviour{
               && transform.position.z >= iniZ + zPos - 0.05 &&  transform.position.z <= iniZ + zPos + 0.05){
                 direction *= -1;
                 goingTo = false;
-            }else{
-                controller.Move(direction);
-            }
+            }else controller.Move(direction);
         }else{
             if(transform.position.y >= iniY - 0.05 && transform.position.y <= iniY + 0.05
              && transform.position.x >= iniX - 0.05 && transform.position.x <= iniX + 0.05
               && transform.position.z >= iniZ - 0.05 &&  transform.position.z <= iniZ + 0.05){
                 direction *= -1;
                 goingTo = true;
-            }else{
-                controller.Move(direction);
-            }
+            }else controller.Move(direction);
         }
     }
     public Vector3 getMoveVector(){

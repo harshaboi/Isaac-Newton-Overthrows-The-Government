@@ -38,19 +38,14 @@ public class PlayerMovement : MonoBehaviour{
         playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         MovePlayer();
         MoveCam();
-        if(impact.magnitude > 0.2){
+        if(impact.magnitude > 0.2) 
             controller.Move(impact * Time.deltaTime);
-        }
         impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 
     private void FixedUpdate(){
-        if(dashCool < dashThreshold){
-            dashCool++;
-        }
-        if(onPlatform){
-            controller.Move(moveable.getMoveVector());
-        }
+        if(dashCool < dashThreshold) dashCool++;
+        if(onPlatform) controller.Move(moveable.getMoveVector());
         if(unhangTimer != 0){
             unhangTimer += 1;
             if(unhangTimer >= 25){
@@ -87,9 +82,8 @@ public class PlayerMovement : MonoBehaviour{
             if(hanging){
                 jumpCount = 1;
                 velocity.y = 0;
-            }else{
-                velocity.y -= gravity * Time.deltaTime * -2f; 
-            }
+            }else velocity.y -= gravity * Time.deltaTime * -2f; 
+            
         }
         if((horizAxis != 0 || vertAxis != 0) && Input.GetAxis("Dash") == 1 && dashCool >= dashThreshold){
             StartCoroutine(dash(transform.TransformDirection(new Vector3(horizAxis, 0, vertAxis))));
@@ -116,9 +110,7 @@ public class PlayerMovement : MonoBehaviour{
         }
     }
     void OnTriggerExit(Collider other){
-        if(other.gameObject.tag == "moveable platform"){
-            onPlatform = false;
-        }
+        if(other.gameObject.tag == "moveable platform") onPlatform = false;
     }
     void OnCollisionStay(Collision hit){
         if(hit.gameObject.tag == "wall"){

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour{
     [SerializeField] private GameObject explosion;
     [SerializeField] private string type;
+    public GameObject testBlock;
     private GameObject player;
     private PlayerMovement p;
     private Rigidbody rb;
@@ -40,11 +41,14 @@ public class PlayerBullet : MonoBehaviour{
     }
 
     void OnCollisionEnter(Collision collision){
-        if(speed == flintSpeed){
+        if(type.Equals("Flintlock")){
             if(collision.gameObject.tag != "Player"){
                 Instantiate(explosion, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
+        }else if(type.Equals("Musket")){
+            Instantiate(testBlock, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
 }
